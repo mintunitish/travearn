@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "863856705865",
+    "firebase_url": "https://travearn-de0a3.firebaseio.com",
+    "project_id": "travearn-de0a3",
+    "storage_bucket": "travearn-de0a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:863856705865:android:8e27820c5b81730381da98",
+        "android_client_info": {
+          "package_name": "app.travearn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "863856705865-ig4bnpsl5eisr56i923jojv0d0ofji9n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.travearn",
+            "certificate_hash": "98c39e9232d7916f44a9cc20319084143f5a956f"
+          }
+        },
+        {
+          "client_id": "863856705865-ekljljf44rsd7emj9h2tdnrt2lurvotq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHrtAv8i7_7HX9KkxGXSHFXT02gFh78C8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "863856705865-ekljljf44rsd7emj9h2tdnrt2lurvotq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
