@@ -4,7 +4,7 @@ import 'package:travearn/components/app_background.dart';
 import 'package:travearn/pages/home_screen.dart';
 import 'package:travearn/pages/login_page.dart';
 import 'package:travearn/pages/splash_screen.dart';
-import 'package:travearn/repositories/UserRepository.dart';
+import 'package:travearn/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
