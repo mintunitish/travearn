@@ -1,5 +1,7 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:travearn/blocs/authentication/authentication_bloc.dart';
+import 'package:travearn/blocs/simple_bloc_delegate.dart';
 import 'package:travearn/components/app_background.dart';
 import 'package:travearn/pages/home_screen.dart';
 import 'package:travearn/pages/login_page.dart';
@@ -9,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   final UserRepository userRepository = UserRepository();
-
+  BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(
     BlocProvider(
       builder: (context) => AuthenticationBloc(userRepository: userRepository)
@@ -48,15 +50,13 @@ class App extends StatelessWidget {
                 AppBackground(),
                 BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
-                    if (state is Uninitialized) {
-                      return SplashScreen();
+                    if (state is Unauthenticated) {
+                      return LoginPage(userRepository: _userRepository,);
                     }
                     if (state is Authenticated) {
                       return HomeScreen(name: state.displayName);
                     }
-                    if (state is Unauthenticated) {
-                      return LoginPage();
-                    }
+                    return SplashScreen();
                   },
                 ),
               ],

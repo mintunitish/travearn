@@ -71,13 +71,6 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
@@ -89,7 +82,7 @@ class _LoginFormState extends State<LoginForm> {
                   content: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text('Login Failure'),
+                      Text('Invalid Credentials!'),
                       Icon(Icons.error)
                     ],
                   ),
@@ -141,7 +134,7 @@ class _LoginFormState extends State<LoginForm> {
                   },
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 15.0),
+                  padding: const EdgeInsets.only(top: 25.0),
                   child: TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
@@ -162,7 +155,7 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 5),
+                  padding: const EdgeInsets.only(top: 40),
                   child: Align(
                     alignment: Alignment.bottomRight,
                     child: FlatButton(
@@ -180,7 +173,7 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 25),
+                  padding: EdgeInsets.symmetric(vertical: 50),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
@@ -206,7 +199,7 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15),
+                        padding: const EdgeInsets.only(top: 35),
                         child: SizedBox(
                           height: 50.0,
                           child: RaisedButton.icon(
@@ -238,7 +231,7 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 11.0),
+                        padding: const EdgeInsets.only(top: 30.0),
                         child: FlatButton(
                           child: Text(
                             'Create Account',
@@ -265,5 +258,10 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 }
