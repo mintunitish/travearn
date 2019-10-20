@@ -9,7 +9,10 @@
  */
 
 import 'package:flutter/material.dart';
+import 'package:travearn/blocs/registration/registration_bloc.dart';
+import 'package:travearn/components/registration_form.dart';
 import 'package:travearn/repositories/user_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterScreen extends StatelessWidget {
   final UserRepository _userRepository;
@@ -21,6 +24,16 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Register'),
+      ),
+      body: Center(
+        child: BlocProvider<RegistrationBloc>(
+          builder: (context) => RegistrationBloc(userRepository: _userRepository),
+          child: RegistrationForm(),
+        ),
+      ),
+    );
   }
 }

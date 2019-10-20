@@ -50,13 +50,15 @@ class App extends StatelessWidget {
                 AppBackground(),
                 BlocBuilder<AuthenticationBloc, AuthenticationState>(
                   builder: (context, state) {
+                    if (state is Uninitialized) {
+                      return SplashScreen();
+                    }
                     if (state is Unauthenticated) {
                       return LoginPage(userRepository: _userRepository,);
                     }
                     if (state is Authenticated) {
                       return HomeScreen(name: state.displayName);
                     }
-                    return SplashScreen();
                   },
                 ),
               ],

@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travearn/blocs/authentication/authentication_bloc.dart';
 import 'package:travearn/blocs/login/login_bloc.dart';
+import 'package:travearn/components/buttons/create_account_button.dart';
 import 'package:travearn/pages/register_screen.dart';
 import 'package:travearn/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -232,20 +233,7 @@ class _LoginFormState extends State<LoginForm> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 30.0),
-                        child: FlatButton(
-                          child: Text(
-                            'Create Account',
-                            style: TextStyle(
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey),
-                          ),
-                          onPressed: () {
-                            MaterialPageRoute(builder: (context) {
-                              return RegisterScreen(userRepository: _userRepository);
-                            });
-                          },
-                        ),
+                        child: CreateAccountButton(userRepository: _userRepository)
                       )
                     ],
                   ),
