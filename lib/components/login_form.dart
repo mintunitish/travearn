@@ -16,6 +16,7 @@ import 'package:travearn/components/buttons/create_account_button.dart';
 import 'package:travearn/pages/register_screen.dart';
 import 'package:travearn/repositories/user_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:travearn/utils/form_helpers.dart';
 
 class LoginForm extends StatefulWidget {
   final UserRepository _userRepository;
@@ -31,7 +32,9 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  
+  final FocusNode _emailFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
+
   LoginBloc _loginBloc;
   
   UserRepository get _userRepository => widget._userRepository;
@@ -128,8 +131,13 @@ class _LoginFormState extends State<LoginForm> {
                         fontWeight: FontWeight.bold,
                       )
                   ),
+                  textInputAction: TextInputAction.next,
                   autocorrect: false,
                   autovalidate: true,
+                  focusNode: _emailFocus,
+                  onFieldSubmitted: (term) {
+                    FormHelpers.fieldFocusChange(context, _emailFocus, _passwordFocus);
+                  },
                   validator: (_) {
                     return !state.isEmailValid ? 'Invalid Email' : null;
                   },
@@ -146,10 +154,16 @@ class _LoginFormState extends State<LoginForm> {
                         labelText: 'Password',
                         labelStyle: TextStyle(
                           fontWeight: FontWeight.bold,
-                        )),
+                        )
+                    ),
                     obscureText: true,
                     autovalidate: true,
                     autocorrect: false,
+                    textInputAction: TextInputAction.done,
+                    focusNode: _passwordFocus,
+                    onFieldSubmitted: (term) {
+                      _passwordFocus.unfocus();
+                    },
                     validator: (_) {
                       return !state.isPasswordValid ? 'Invalid Password' : null;
                     },
@@ -174,7 +188,7 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 50),
+                  padding: EdgeInsets.symmetric(vertical: 30),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
@@ -200,7 +214,7 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 35),
+                        padding: const EdgeInsets.only(top: 15),
                         child: SizedBox(
                           height: 50.0,
                           child: RaisedButton.icon(
@@ -232,7 +246,7 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 30.0),
+                        padding: const EdgeInsets.only(top: 25.0),
                         child: CreateAccountButton(userRepository: _userRepository)
                       )
                     ],

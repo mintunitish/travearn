@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:travearn/blocs/authentication/authentication_bloc.dart';
 import 'package:travearn/blocs/registration/registration_bloc.dart';
+import 'package:travearn/utils/form_helpers.dart';
 
 class RegistrationForm extends StatefulWidget {
   State<RegistrationForm> createState() => _RegistrationFormState();
@@ -20,6 +21,8 @@ class RegistrationForm extends StatefulWidget {
 class _RegistrationFormState extends State<RegistrationForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final FocusNode _emailFocus = FocusNode();
+  final FocusNode _passwordFocus = FocusNode();
   
   RegistrationBloc _registrationBloc;
   
@@ -101,28 +104,46 @@ class _RegistrationFormState extends State<RegistrationForm> {
       },
       child: BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
-          return Padding(
-            padding: EdgeInsets.all(20),
-            child: Form(
-              child: ListView(
-                children: <Widget>[
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                      icon: Icon(Icons.email),
-                      labelText: 'Email'
+          return Form(
+            child: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.email,
+                      color: Colors.black,
                     ),
-                    autocorrect: false,
-                    autovalidate: true,
-                    validator: (_) {
-                      return !state.isEmailValid ? 'Invalid Email' : null;
-                    },
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    )
                   ),
-                  TextFormField(
+                  textInputAction: TextInputAction.next,
+                  focusNode: _emailFocus,
+                  onFieldSubmitted: (term) {
+                    FormHelpers.fieldFocusChange(context, _emailFocus, _passwordFocus);
+                  },
+                  autocorrect: false,
+                  autovalidate: true,
+                  validator: (_) {
+                    return !state.isEmailValid ? 'Invalid Email' : null;
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 25.0),
+                  child: TextFormField(
                     controller: _passwordController,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.lock),
-                      labelText: 'Password',
+                        icon: Icon(
+                          Icons.vpn_key,
+                          color: Colors.black,
+                        ),
+                        labelText: 'Password',
+                        labelStyle: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        )
                     ),
                     obscureText: true,
                     autocorrect: false,
@@ -130,16 +151,38 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     validator: (_) {
                       return !state.isPasswordValid ? 'Invalid Password' : null;
                     },
+                    textInputAction: TextInputAction.done,
+                    focusNode: _passwordFocus,
+                    onFieldSubmitted: (term) {
+                      _passwordFocus.unfocus();
+                    },
                   ),
-                  RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 50.0),
+                  child: SizedBox(
+                    height: 50.0,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(3.5),
+                      ),
+                      onPressed: isRegisterButtonEnabled(state) ? _onFormSubmitted : null,
+                      child: Text(
+                        'REGISTER',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 17.5
+                        ),
+                      ),
+                      color: Color(int.parse('#5d9dfe'.substring(1, 7), radix: 16) + 0xFF000000),
+                      elevation: 10,
+                      highlightElevation: 2,
+                      splashColor: Colors.blue,
                     ),
-                    onPressed: isRegisterButtonEnabled(state) ? _onFormSubmitted : null,
-                    child: Text('Register'),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           );
         },

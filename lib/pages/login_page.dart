@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: const EdgeInsets.only(top: 80),
+              padding: const EdgeInsets.only(top: 70),
               child: Text(
                 'Hello,',
                 style: TextStyle(
@@ -53,11 +53,17 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 100.0),
-            child: BlocProvider<LoginBloc>(
-              builder: (context) => LoginBloc(userRepository: _userRepository),
-              child: LoginForm(userRepository: _userRepository),
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: 50,
+                  bottom: MediaQuery.of(context).viewInsets.bottom
+              ),
+              child: BlocProvider<LoginBloc>(
+                builder: (context) => LoginBloc(userRepository: _userRepository),
+                child: LoginForm(userRepository: _userRepository),
+              ),
             ),
           )
         ],
