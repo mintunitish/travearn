@@ -218,8 +218,8 @@ class _LoginFormState extends State<LoginForm> {
                         child: SizedBox(
                           height: 50.0,
                           child: RaisedButton.icon(
-                            elevation: 10,
-                            highlightElevation: 2,
+                            elevation: 15,
+                            highlightElevation: 5,
                             splashColor: Colors.red,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(3.5),

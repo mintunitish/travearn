@@ -10,6 +10,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travearn/blocs/login/login_bloc.dart';
 import 'package:travearn/components/login_form.dart';
 import 'package:travearn/repositories/user_repository.dart';
@@ -29,9 +30,16 @@ class LoginPage extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 70),
+                child: Image.asset('assets/images/logo.png'),
+              )
+          ),
+          Align(
             alignment: Alignment.topLeft,
             child: Padding(
-              padding: const EdgeInsets.only(top: 70),
+              padding: const EdgeInsets.only(top: 60),
               child: Text(
                 'Hello,',
                 style: TextStyle(
@@ -54,7 +62,6 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 1,
             child: Padding(
               padding: EdgeInsets.only(
                   top: 50,
