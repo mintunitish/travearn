@@ -57,7 +57,7 @@ class App extends StatelessWidget {
                       return LoginPage(userRepository: _userRepository,);
                     }
                     if (state is Authenticated) {
-                      return HomeScreen(name: state.displayName);
+                      return HomeScreen(userRepository: _userRepository);
                     }
                   },
                 ),
