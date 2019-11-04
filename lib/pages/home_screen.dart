@@ -38,34 +38,38 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    //_navBloc.close();
+    _navBloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: _navBloc,
-      builder: (context, NavigationState state) {
-        if (state is ShowDashboard) {
-          return buildNavLayout('DashBoard');
-        }
-        else if (state is ShowProfile) {
-          return buildNavLayout('Profile');
-        }
-        else if (state is ShowRewards) {
-          return buildNavLayout('Rewards');
-        }
-      },
-    );
-  }
-
-  Scaffold buildNavLayout(String text) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text(text),
-        ),
+      body: BlocBuilder(
+        bloc: _navBloc,
+        builder: (context, NavigationState state) {
+          if (state is ShowDashboard) {
+            return Container(
+              child: Center(
+                child: Text('Dashboard'),
+              ),
+            );
+          }
+          else if (state is ShowProfile) {
+            return Container(
+              child: Center(
+                child: Text('Profile'),
+              ),
+            );
+          }
+          else if (state is ShowRewards) {
+            return Container(
+              child: Center(
+                child: Text('Rewards'),
+              ),
+            );
+          }
+        },
       ),
       bottomNavigationBar: FancyBottomNavigation(
         tabs: [
@@ -98,4 +102,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+
 }
